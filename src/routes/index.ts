@@ -5,7 +5,7 @@ import images from "./api/images";
 
 const routes = express.Router();
 
-routes.get("/", (req: express.Request, res: express.Response) => {
+routes.get("/", (req: express.Request, res: express.Response): void => {
   res.send("Welcome To Api Process Images");
 });
 

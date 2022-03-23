@@ -41,15 +41,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // import express
 var express_1 = __importDefault(require("express"));
-// import sharp library for processing images
-var sharp_1 = __importDefault(require("sharp"));
 // import path module
 var path_1 = __importDefault(require("path"));
-// import fileSystem module
-var fs_1 = require("fs");
-var fs_2 = __importDefault(require("fs"));
 // import images data to use
 var ImagesData_1 = __importDefault(require("../../utilities/ImagesData"));
+var resize_1 = __importDefault(require("./resize"));
 // create images routes
 var images = express_1.default.Router();
 // create images endPoint
@@ -78,27 +74,13 @@ images.get("/", function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 if (imagesName === false) {
                     return [2 /*return*/, res.status(404).send("This Image Doesn't Exist Enter A Valid One")];
                 }
-                if (!!fs_2.default.existsSync("build/resized-img")) return [3 /*break*/, 2];
-                // create a folder if it doesn't exist
-                return [4 /*yield*/, fs_1.promises.mkdir("build/resized-img")];
+                // using the process image function
+                return [4 /*yield*/, (0, resize_1.default)(img, width, height, resizedImg)];
             case 1:
-                // create a folder if it doesn't exist
+                // using the process image function
                 _a.sent();
-                _a.label = 2;
-            case 2:
-                if (!!fs_2.default.existsSync(resizedImg)) return [3 /*break*/, 4];
-                // using sharp library to resize image
-                return [4 /*yield*/, (0, sharp_1.default)(img)
-                        .resize({ width: width, height: height })
-                        .toFile(resizedImg)];
-            case 3:
-                // using sharp library to resize image
-                _a.sent();
-                _a.label = 4;
-            case 4:
                 // send the image to the user
-                res.sendFile(path_1.default.resolve("./") + "/build/resized-img/".concat(imgName, "x").concat(width, "x").concat(height, ".jpg"));
-                return [2 /*return*/];
+                return [2 /*return*/, res.sendFile(path_1.default.resolve("./") + "/build/resized-img/".concat(imgName, "x").concat(width, "x").concat(height, ".jpg"))];
         }
     });
 }); });

@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var supertest_1 = __importDefault(require("supertest"));
 var __1 = __importDefault(require("../../.."));
+var resize_1 = __importDefault(require("../../../routes/api/resize"));
 var request = (0, supertest_1.default)(__1.default);
 describe("testing the images endpoints", function () {
     it("using the endpoint without enter img name return 400", function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -73,4 +74,16 @@ describe("testing the images endpoints", function () {
             }
         });
     }); });
+    it("processing image", function () {
+        expect(function () { return __awaiter(void 0, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, (0, resize_1.default)("fjord", 100, 100, "build/resized-img")];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        }); }).not.toThrow();
+    });
 });
