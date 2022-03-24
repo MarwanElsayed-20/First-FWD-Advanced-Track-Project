@@ -39,35 +39,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// import sharp library to process images
 var sharp_1 = __importDefault(require("sharp"));
+// import file system module
 var fs_1 = __importDefault(require("fs"));
 var fs_2 = require("fs");
+// async function to resize images using sharp
 var resizeImgs = function (img, width, height, resizedImg) { return __awaiter(void 0, void 0, void 0, function () {
     var error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                if (!!fs_1.default.existsSync("build/resized-img")) return [3 /*break*/, 2];
+                if (!!fs_1.default.existsSync('build/resized-img')) return [3 /*break*/, 2];
                 // create a folder if it doesn't exist
-                return [4 /*yield*/, fs_2.promises.mkdir(__dirname + "build/resized-img")];
+                return [4 /*yield*/, fs_2.promises.mkdir(__dirname + 'build/resized-img')];
             case 1:
                 // create a folder if it doesn't exist
                 _a.sent();
                 _a.label = 2;
             case 2:
                 _a.trys.push([2, 4, , 5]);
-                return [4 /*yield*/, (0, sharp_1.default)(img)
-                        .resize({ width: width, height: height })
-                        .toFile(resizedImg)];
+                return [4 /*yield*/, (0, sharp_1.default)(img).resize({ width: width, height: height }).toFile(resizedImg)];
             case 3:
                 _a.sent();
                 return [3 /*break*/, 5];
             case 4:
                 error_1 = _a.sent();
-                console.log("error while processing image", error_1);
+                console.log('error while processing image', error_1);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
     });
 }); };
+// export resize function
 exports.default = resizeImgs;

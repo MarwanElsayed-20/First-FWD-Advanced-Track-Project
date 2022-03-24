@@ -43,13 +43,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 // import path module
 var path_1 = __importDefault(require("path"));
+// import fileSystem module
+var fs_1 = __importDefault(require("fs"));
 // import images data to use
 var ImagesData_1 = __importDefault(require("../../utilities/ImagesData"));
 var resize_1 = __importDefault(require("./resize"));
 // create images routes
 var images = express_1.default.Router();
 // create images endPoint
-images.get("/", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+images.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var imgName, width, height, img, resizedImg, imagesName;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -57,30 +59,33 @@ images.get("/", function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 imgName = req.query.imagename;
                 width = parseInt(req.query.width);
                 height = parseInt(req.query.height);
-                img = path_1.default.resolve("./") + "/build/imgs/".concat(imgName, ".jpg");
+                img = path_1.default.resolve('./') + "/build/imgs/".concat(imgName, ".jpg");
                 resizedImg = "build/resized-img/".concat(imgName, "x").concat(width, "x").concat(height, ".jpg");
                 imagesName = ImagesData_1.default.includes(imgName);
                 // check if the user entered a imgName or not
                 if (imgName === undefined) {
                     return [2 /*return*/, res
                             .status(400)
-                            .send("You Need To Enter The imgName In A Query Parameter")];
+                            .send('You Need To Enter The imgName In A Query Parameter')];
                 }
                 // check if the user entered a width and height
                 if (width === 0 || height === 0) {
-                    return [2 /*return*/, res.status(400).send("Invalid, The Width Or The Height cant be 0")];
+                    return [2 /*return*/, res.status(400).send('Invalid, The Width Or The Height cant be 0')];
                 }
                 // check if the user entered a valid imgName or not
                 if (imagesName === false) {
-                    return [2 /*return*/, res.status(404).send("This Image Doesn't Exist Enter A Valid One")];
+                    return [2 /*return*/, res.status(404).send('This Image Does not Exist Enter A Valid One')];
                 }
+                if (!!fs_1.default.existsSync(resizedImg)) return [3 /*break*/, 2];
                 // using the process image function
                 return [4 /*yield*/, (0, resize_1.default)(img, width, height, resizedImg)];
             case 1:
                 // using the process image function
                 _a.sent();
-                // send the image to the user
-                return [2 /*return*/, res.sendFile(path_1.default.resolve("./") + "/build/resized-img/".concat(imgName, "x").concat(width, "x").concat(height, ".jpg"))];
+                _a.label = 2;
+            case 2: 
+            // send the image to the user
+            return [2 /*return*/, res.sendFile(path_1.default.resolve('./') + "/build/resized-img/".concat(imgName, "x").concat(width, "x").concat(height, ".jpg"))];
         }
     });
 }); });
