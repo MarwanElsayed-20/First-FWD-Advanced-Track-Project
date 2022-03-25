@@ -18,7 +18,7 @@ images.get('/', async (req: express.Request, res: express.Response) => {
   const height: number = parseInt(req.query.height as string)
   // get img absolute path
   const img = path.resolve('./') + `/build/imgs/${imgName}.jpg`
-  const resizedImg = `build/resized-img/${imgName}x${width}x${height}.jpg`
+  const resizedImg = `resized-img/${imgName}x${width}x${height}.jpg`
 
   // put image name in  includes to check if it there or not
   const imagesName = imagesData.includes(imgName)
@@ -48,7 +48,7 @@ images.get('/', async (req: express.Request, res: express.Response) => {
 
   // send the image to the user
   return res.sendFile(
-    path.resolve('./') + `/build/resized-img/${imgName}x${width}x${height}.jpg`
+    path.resolve('./') + `/resized-img/${imgName}x${width}x${height}.jpg`
   )
 })
 

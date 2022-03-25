@@ -11,9 +11,9 @@ const resizeImgs = async (
   height: number,
   resizedImg: string
 ) => {
-  if (!fs.existsSync('build/resized-img')) {
+  if (!fs.existsSync('resized-img')) {
     // create a folder if it doesn't exist
-    await fsPromises.mkdir(__dirname + 'build/resized-img')
+    await fsPromises.mkdir('resized-img')
   }
 
   // using sharp to resize image and create it
