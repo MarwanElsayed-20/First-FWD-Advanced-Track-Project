@@ -20,7 +20,6 @@ images.get('/', async (req: express.Request, res: express.Response) => {
   const img = path.resolve('./') + `/build/imgs/${imgName}.jpg`
   const resizedImg =
     path.resolve('./') + `/resized-img/${imgName}x${width}x${height}.jpg`
-
   // put image name in  includes to check if it there or not
   const imagesName = imagesData.includes(imgName)
 

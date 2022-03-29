@@ -50,9 +50,9 @@ var resizeImgs = function (img, width, height, resizedImg) { return __awaiter(vo
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                if (!!fs_1.default.existsSync('build/resized-img')) return [3 /*break*/, 2];
+                if (!!fs_1.default.existsSync('resized-img')) return [3 /*break*/, 2];
                 // create a folder if it doesn't exist
-                return [4 /*yield*/, fs_2.promises.mkdir(__dirname + 'build/resized-img')];
+                return [4 /*yield*/, fs_2.promises.mkdir('resized-img')];
             case 1:
                 // create a folder if it doesn't exist
                 _a.sent();
