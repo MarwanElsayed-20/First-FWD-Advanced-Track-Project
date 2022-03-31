@@ -59,8 +59,8 @@ images.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 imgName = req.query.imagename;
                 width = parseInt(req.query.width);
                 height = parseInt(req.query.height);
-                img = path_1.default.resolve('./') + "\\build\\imgs\\".concat(imgName, ".jpg");
-                resizedImg = path_1.default.resolve('./') + "\\resized-img\\".concat(imgName, "x").concat(width, "x").concat(height, ".jpg");
+                img = path_1.default.resolve("./build/imgs/".concat(imgName, ".jpg"));
+                resizedImg = path_1.default.resolve("./resized-img/".concat(imgName, "x").concat(width, "x").concat(height, ".jpg"));
                 imagesName = ImagesData_1.default.includes(imgName);
                 // check if the user entered a imgName or not
                 if (imgName === undefined) {
@@ -85,7 +85,7 @@ images.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 _a.label = 2;
             case 2: 
             // send the image to the user
-            return [2 /*return*/, res.sendFile(path_1.default.resolve('./') + "\\resized-img\\".concat(imgName, "x").concat(width, "x").concat(height, ".jpg"))];
+            return [2 /*return*/, res.sendFile(path_1.default.resolve("./resized-img/".concat(imgName, "x").concat(width, "x").concat(height, ".jpg")))];
         }
     });
 }); });
